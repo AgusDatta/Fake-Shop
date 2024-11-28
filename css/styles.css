@@ -4,7 +4,7 @@ body {
     background-color: #CBC5D9; /* Gris Lavanda */
     color: #2B3040; /* Gris Oscuro */
     margin-top: 80px;
-    padding: 20px 0;
+    padding-top: 20px;
 }
 
 main {
@@ -267,4 +267,47 @@ header #cart-button .badge {
     opacity: 1;
 }
 
+.footer {
+    background-color: #2B3040; /* Fondo oscuro */
+    color: #FFFFFF; /* Texto blanco */
+    padding: 40px 0; /* Espaciado */
+    border-top: 2px solid #5A24A6; /* Línea superior */
+}
+
+.footer h4 {
+    color: #FFFFFF; /* Encabezados en blanco */
+}
+
+.footer p {
+    color: #BDBDBD; /* Texto secundario */
+}
+
+.footer .btn-primary {
+    background-color: #0A66C2; /* Azul de LinkedIn */
+    border: none;
+    margin-top: 10px;
+}
+
+.footer .btn-primary:hover {
+    background-color: #004182; /* Azul más oscuro al pasar el mouse */
+}
+
+.footer ul {
+    margin: 0;
+    padding: 0;
+    list-style: none; /* Sin viñetas */
+}
+
+.footer ul li {
+    margin: 5px 0;
+}
+
+.footer ul li::before {
+    content: "•"; /* Punto decorativo */
+    color: #5A24A6; /* Violeta */
+    font-weight: bold;
+    display: inline-block;
+    width: 1em;
+    margin-left: -1em;
+}
 
