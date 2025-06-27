@@ -3,77 +3,83 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="E-commerce moderno de productos con carrito de compras">
     <title>Fake-Shop</title>
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="icon" href="favicon.ico">
+
+    <!-- Fonts and Icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Orbitron:wght@500&display=swap">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap">
+
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="css/styles.css">
+    
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-lg navbar-light fixed-top shadow">
+        <nav class="navbar navbar-expand-lg navbar-dark fixed-top shadow-sm" style="background-color: var(--primary-color);">
             <div class="container-fluid d-flex justify-content-between align-items-center">
-                <a class="navbar-brand fs-4 fw-bold" style="text-decoration: none" href="#">Fake-Shop</a>
-                <button class="btn position-relative" id="cart-button">
-                    <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="currentColor"  class="icon icon-tabler icons-tabler-filled icon-tabler-shopping-cart"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M6 2a1 1 0 0 1 .993 .883l.007 .117v1.068l13.071 .935a1 1 0 0 1 .929 1.024l-.01 .114l-1 7a1 1 0 0 1 -.877 .853l-.113 .006h-12v2h10a3 3 0 1 1 -2.995 3.176l-.005 -.176l.005 -.176c.017 -.288 .074 -.564 .166 -.824h-5.342a3 3 0 1 1 -5.824 1.176l-.005 -.176l.005 -.176a3.002 3.002 0 0 1 1.995 -2.654v-12.17h-1a1 1 0 0 1 -.993 -.883l-.007 -.117a1 1 0 0 1 .883 -.993l.117 -.007h2zm0 16a1 1 0 1 0 0 2a1 1 0 0 0 0 -2zm11 0a1 1 0 1 0 0 2a1 1 0 0 0 0 -2z" /></svg>
-                    <span class="badge position-absolute top-0 start-100 translate-middle" id="cart-count">0</span>
+                <a class="navbar-brand fs-4" style="font-family: 'Orbitron', sans-serif;" href="#">Fake-Shop</a>
+                <button class="btn position-relative text-white bg-dark" id="cart-button">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
+                        <path d="M0 1.5A.5.5 0 0 1 .5 1h1a.5.5 0 0 1 .485.379L2.89 5H14.5a.5.5 0 0 1 .49.598l-1.5 7A.5.5 0 0 1 13 13H4a.5.5 0 0 1-.49-.402L1.61 2H.5a.5.5 0 0 1-.5-.5zm3.14 4l1.25 5h7.22l1.25-5H3.14zM5.5 12a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm8 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+                    </svg>
+                    <span class="badge bg-success rounded-circle position-absolute top-0 start-100 translate-middle" id="cart-count">0</span>
                 </button>
             </div>
         </nav>
     </header>
-    <main class="container mt-5">
-        <div id="product-list" class="row gy-4"></div>
+
+    <main class="container py-5 mt-5">
+        <div class="row" id="product-list"></div>
     </main>
+
+    <!-- Sidebar Cart -->
     <div id="overlay" class="overlay"></div>
-    <div id="sidebar" class="sidebar shadow-lg"></div>  
-    <div id="productModal" class="modal fade" tabindex="-1" role="dialog">
-        <div class="modal-dialog modal-dialog-centered" role="document">
+    <aside id="sidebar" class="sidebar shadow-lg"></aside>
+
+    <!-- Modal Producto -->
+    <div id="productModal" class="modal fade" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="modalTitle"></h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
-                    <img id="modalImage" src="" alt="Product Image" class="img-fluid rounded mb-3" style="width: 100%; height: auto;">
+                <div class="modal-body text-center">
+                    <img id="modalImage" class="img-fluid rounded mb-3" alt="Imagen del producto">
                     <div id="modalBody"></div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                     <button type="button" class="btn btn-success" onclick="addToCart()">Agregar al carrito</button>
                 </div>
             </div>
         </div>
     </div>
-    <footer class="footer bg-dark text-white py-3">
-        <div class="container">
-            <div class="d-flex flex-column flex-md-row justify-content-between align-items-start">
-                <!-- Descripción -->
-                <div class="about-section mb-3 mb-md-0">
-                    <h4 class="fw-bold">Sobre Fake-Shop</h4>
-                    <p class="mb-2">
-                        Envío gratis en millones de productos. Disfruta de lo mejor en compras y entretenimiento con Fake-Shop.
-                        Aprovecha precios bajos y grandes ofertas en la tienda electrónica global más grande.
-                    </p>
-                </div>
-                <!-- Developers -->
-                <div class="developers-section" style="margin-left: 10px;">
-                    <h4 class="fw-bold">Developers:</h4>
-                    <ul class="list-unstyled mb-0">
-                        <li>Agustin Dattilio</li>
-                    </ul>
-                    <a href="https://www.linkedin.com/in/agustin-dattilio-01577b194/" target="_blank" class="btn btn-primary btn-sm">
-                        <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-brand-linkedin"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M8 11v5" /><path d="M8 8v.01" /><path d="M12 16v-5" /><path d="M16 16v-3a2 2 0 1 0 -4 0" /><path d="M3 7a4 4 0 0 1 4 -4h10a4 4 0 0 1 4 4v10a4 4 0 0 1 -4 4h-10a4 4 0 0 1 -4 -4z" /></svg>
-                    </a>
-                </div>
+
+    <!-- Footer -->
+    <footer class="footer bg-dark text-white py-4 mt-5">
+        <div class="container d-flex flex-column flex-md-row justify-content-between">
+            <div>
+                <h5>Sobre Fake-Shop</h5>
+                <p>Compra con confianza en nuestra tienda con miles de productos a los mejores precios.</p>
+            </div>
+            <div>
+                <h5>Developer</h5>
+                <p>Agustin Dattilio</p>
+                <a href="https://www.linkedin.com/in/agustin-dattilio-01577b194/" target="_blank" class="btn btn-primary btn-sm">LinkedIn</a>
             </div>
         </div>
-    </footer>   
+    </footer>
+
+    <!-- JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="js/main.js"></script>
+    <script src="js/main.js" defer></script>
     <script src="js/products.js" defer></script>
-    <script src="js/cart.js"></script>
-    <script src="js/renderCart.js"></script>
-    <script src="js/actions.js"></script>
+    <script src="js/cart.js" defer></script>
+    <script src="js/renderCart.js" defer></script>
+    <script src="js/actions.js" defer></script>
 </body>
 </html>
